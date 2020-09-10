@@ -10,6 +10,10 @@ Fork this repository and implement the code required for the assignments below.
 
 You are required to implement a model using Entity Framework Core for a simple kanban board for tracking work progress.
 
+1. Install the required `Microsoft.EntityFrameworkCore` package.
+
+1. Setup and configure your database host of choice.
+
 1. Implement the following entities (*POCOs*) in the `Entities` folder.
 
     - Task
