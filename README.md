@@ -1,3 +1,5 @@
+__Note__: please read the full list as some of the SE exercises are to be done before the C&#35; ones
+
 # Assignment #3
 
 ## C&#35;
