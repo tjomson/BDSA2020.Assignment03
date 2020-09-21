@@ -9,7 +9,7 @@ namespace BDSA2020.Assignment03.Entities
 
         [Required]
         [StringLength(100)]
-        public string Title {get; set;}
+        public string Name {get; set;}
         
     }
 }
