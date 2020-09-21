@@ -14,11 +14,7 @@ namespace BDSA2020.Assignment03.Entities
         [StringLength(100)]
         public string? Description {get; set;}
         [Required]
-        public State State {get; set;}
+        public State TaskState {get; set;}
         public ICollection<Tag> Tags {get; set;}
-    }
-
-    public enum State{
-        NEW,ACTIVE,RESOLVED,CLOSED,REMOVED
     }
 }

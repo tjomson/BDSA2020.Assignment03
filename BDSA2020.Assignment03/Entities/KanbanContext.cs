@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using System;
 
 namespace BDSA2020.Assignment03.Entities
 {
@@ -25,7 +26,8 @@ namespace BDSA2020.Assignment03.Entities
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Task>().HasKey(t => t.Id);
             modelBuilder.Entity<TaskTag>().HasNoKey();
-            
+            modelBuilder.Entity<Task>().Property(t => t.TaskState).HasConversion(v => v.ToString(),v => (State)Enum.Parse(typeof(State), v));
+
         }
     }
 }
