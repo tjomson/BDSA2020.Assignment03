@@ -4,14 +4,16 @@ using BDSA2020.Assignment03.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BDSA2020.Assignment03.Migrations
 {
     [DbContext(typeof(KanbanContext))]
-    partial class KanbanContextModelSnapshot : ModelSnapshot
+    [Migration("20200922085949_testadduser")]
+    partial class testadduser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,29 +33,17 @@ namespace BDSA2020.Assignment03.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<int?>("TaskId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Tags");
+                    b.HasIndex("TaskId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "tag1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "tag2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "tag3"
-                        });
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("BDSA2020.Assignment03.Entities.Task", b =>
@@ -84,50 +74,17 @@ namespace BDSA2020.Assignment03.Migrations
                     b.HasIndex("AssignedToId");
 
                     b.ToTable("Tasks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            TaskState = "ACTIVE",
-                            Title = "Do something"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            TaskState = "RESOLVED",
-                            Title = "do more"
-                        });
                 });
 
             modelBuilder.Entity("BDSA2020.Assignment03.Entities.TaskTag", b =>
                 {
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TagId")
                         .HasColumnType("int");
 
-                    b.HasKey("TaskId", "TagId");
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
 
                     b.ToTable("TaskTags");
-
-                    b.HasData(
-                        new
-                        {
-                            TaskId = 1,
-                            TagId = 1
-                        },
-                        new
-                        {
-                            TaskId = 1,
-                            TagId = 2
-                        },
-                        new
-                        {
-                            TaskId = 2,
-                            TagId = 3
-                        });
                 });
 
             modelBuilder.Entity("BDSA2020.Assignment03.Entities.User", b =>
@@ -161,6 +118,13 @@ namespace BDSA2020.Assignment03.Migrations
                             Email = "john@email.dk",
                             Name = "John"
                         });
+                });
+
+            modelBuilder.Entity("BDSA2020.Assignment03.Entities.Tag", b =>
+                {
+                    b.HasOne("BDSA2020.Assignment03.Entities.Task", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("TaskId");
                 });
 
             modelBuilder.Entity("BDSA2020.Assignment03.Entities.Task", b =>

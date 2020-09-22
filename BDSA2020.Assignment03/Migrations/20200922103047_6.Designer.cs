@@ -4,14 +4,16 @@ using BDSA2020.Assignment03.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BDSA2020.Assignment03.Migrations
 {
     [DbContext(typeof(KanbanContext))]
-    partial class KanbanContextModelSnapshot : ModelSnapshot
+    [Migration("20200922103047_6")]
+    partial class _6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,32 +104,13 @@ namespace BDSA2020.Assignment03.Migrations
 
             modelBuilder.Entity("BDSA2020.Assignment03.Entities.TaskTag", b =>
                 {
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TagId")
                         .HasColumnType("int");
 
-                    b.HasKey("TaskId", "TagId");
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
 
                     b.ToTable("TaskTags");
-
-                    b.HasData(
-                        new
-                        {
-                            TaskId = 1,
-                            TagId = 1
-                        },
-                        new
-                        {
-                            TaskId = 1,
-                            TagId = 2
-                        },
-                        new
-                        {
-                            TaskId = 2,
-                            TagId = 3
-                        });
                 });
 
             modelBuilder.Entity("BDSA2020.Assignment03.Entities.User", b =>

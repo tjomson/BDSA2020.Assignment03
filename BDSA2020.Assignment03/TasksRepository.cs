@@ -1,6 +1,7 @@
 using BDSA2020.Assignment03.Entities;
 using System;
 using System.Collections.Generic;
+using 
 
 namespace BDSA2020.Assignment03
 {
@@ -20,6 +21,9 @@ namespace BDSA2020.Assignment03
         /// <returns>The id of the newly created task</returns>
         public int Create(TaskDTO task)
         {
+
+            //_context.Tasks.Add(new Task {Id = task.Id, Title = task.Title, Description = task.Description, AssignedTo = task.AssignedToId, TaskState = task.State});
+        
             throw new NotImplementedException();
         }
 

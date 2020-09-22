@@ -15,6 +15,5 @@ namespace BDSA2020.Assignment03.Entities
         public string? Description {get; set;}
         [Required]
         public State TaskState {get; set;}
-        public ICollection<Tag> Tags {get; set;}
     }
 }
