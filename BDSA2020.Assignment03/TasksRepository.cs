@@ -33,7 +33,7 @@ namespace BDSA2020.Assignment03
                     Id = task.Id, 
                     Title = task.Title, 
                     Description = task.Description, 
-                    AssignedTo = assignedToUser.First(), 
+                    AssignedToId = assignedToUser.First().Id, 
                     TaskState = task.State});
 
             if (task.AssignedToId == null)
@@ -53,7 +53,7 @@ namespace BDSA2020.Assignment03
             
             var foundUser =
                 from user in _context.Users
-                where user.Id == foundTask.First().AssignedTo.Id //Noget galt her
+                where user.Id == foundTask.First().AssignedToId //Noget galt her
                 select user;
 
             var foundTagIds =
@@ -92,6 +92,7 @@ namespace BDSA2020.Assignment03
                 };
         }
 
+        //Untested
         public ICollection<TaskDTO> All()
         {
             List<TaskDTO> allTasks = new List<TaskDTO>();
@@ -122,7 +123,7 @@ namespace BDSA2020.Assignment03
                     Id = task.Id,
                     Title = task.Title,
                     Description = task.Description,
-                    AssignedToId = task.AssignedTo.Id,
+                    AssignedToId = task.AssignedToId,
                     Tags = tasksAsList,
                     State = task.TaskState
                 });
@@ -132,13 +133,31 @@ namespace BDSA2020.Assignment03
 
         public void Update(TaskDTO task)
         {
-            throw new NotImplementedException();
+            var givenTask =
+                from t in _context.Tasks
+                where t.Id == task.Id
+                select t;
+
+            var taskObject = givenTask.FirstOrDefault();
+
+            taskObject.Title = task.Title;
+            taskObject.Description = task.Description;
+            taskObject.AssignedToId = task.AssignedToId;
+            taskObject.TaskState = task.State;
+
+            //TODO
+
+
         }
 
         public void Delete(int taskId)
         {
+            var toBeDeleted = 
+                from task in _context.Tasks
+                where task.Id == taskId
+                select task;
+        //TODO
             
-            throw new NotImplementedException();
         }
 
         public void Dispose()

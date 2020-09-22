@@ -11,7 +11,7 @@ namespace BDSA2020.Assignment03.Entities
         [StringLength(100)]
         public string Title {get; set;}
         public int? AssignedToId {get; set;}
-        public User? AssignedTo {get; set;}
+
         [StringLength(100)]
         public string? Description {get; set;}
         [Required]
