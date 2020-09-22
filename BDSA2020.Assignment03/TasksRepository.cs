@@ -35,6 +35,8 @@ namespace BDSA2020.Assignment03
                     Description = task.Description, 
                     AssignedToId = assignedToUser.First().Id, 
                     TaskState = task.State});
+            
+            AddTagsForTask(task);
 
             if (task.AssignedToId == null)
             {
@@ -144,9 +146,20 @@ namespace BDSA2020.Assignment03
             taskObject.Description = task.Description;
             taskObject.AssignedToId = task.AssignedToId;
             taskObject.TaskState = task.State;
+            //Doesn't remove unnecessary tags in TaskTag
+/*
+            var taskTagsToBeRemoved =
+                from tasktag in _context.TaskTags
+                where tasktag.TaskId == task.Id
+                
+                select tasktag;
 
-            //TODO
-
+            foreach (var tasktag in taskTagsToBeRemoved)
+            {
+                _context.TaskTags.Remove(tasktag);
+            }
+*/
+            AddTagsForTask(task);
 
         }
 
@@ -156,13 +169,39 @@ namespace BDSA2020.Assignment03
                 from task in _context.Tasks
                 where task.Id == taskId
                 select task;
-        //TODO
+
+            _context.Tasks.Remove(toBeDeleted.FirstOrDefault());
+
+        //Doesn't remove unnecessary tags in TaskTag
             
         }
 
         public void Dispose()
         {
             throw new NotImplementedException();
+        }
+
+        public void AddTagsForTask(TaskDTO task)
+        {
+            var taskIds =
+                from taskk in _context.Tasks
+                select taskk.Id;
+
+            var maxId = taskIds.Max();
+            List<int> addedIds = new List<int>();
+            var counter = 1;
+
+            foreach (var tagName in task.Tags)
+            {
+                addedIds.Add(maxId + counter);
+                _context.Tags.Add(new Tag {Id = maxId + counter, Name = tagName});
+                counter++;
+            }
+
+            foreach (var id in addedIds)
+            {
+                _context.TaskTags.Add(new TaskTag{TaskId = task.Id, TagId = id});
+            }
         }
     }
 }

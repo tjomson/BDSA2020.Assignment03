@@ -18,19 +18,6 @@ namespace BDSA2020.Assignment03.Entities
             options.EnableSensitiveDataLogging();
         }
 
-        /*ICollection<TaskTag> ConvertToTaskTag(string taskTitle, params string[] tags)
-        {
-            var taskDict = Tasks.ToDictionary(x => x.Title, x => x.Id);
-            var tagDict = Tags.ToDictionary(x => x.Name, x => x.Id);
-
-            var output = from tag in tags
-                let taskId = taskDict[taskTitle]
-                let tagId = tagDict[tag]
-                select new TaskTag {TaskId = taskId, TagId = tagId};
-
-            return output.ToList();
-        }*/
-
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             modelBuilder.Entity<Tag>().HasKey(t => t.Id);
