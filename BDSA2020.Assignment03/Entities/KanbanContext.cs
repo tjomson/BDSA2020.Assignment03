@@ -43,7 +43,7 @@ namespace BDSA2020.Assignment03.Entities
 
 
             var tasks = new[]{
-                new Task {Id = 1, Title = "Do something", TaskState = State.ACTIVE}, 
+                new Task {Id = 1, Title = "Do something", Description = "very cool task", TaskState = State.ACTIVE, AssignedToId = 1}, 
                 new Task {Id = 2, Title = "do more", TaskState = State.RESOLVED}
             };
 
